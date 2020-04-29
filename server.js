@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express')
 const app = express()
 const port = process.env.PORT
@@ -5,7 +7,20 @@ const port = process.env.PORT
 const twitter = require('twitter-lite')
 const getTweets = require('./getTweets.js')
 
-app.get('/', async (req, res) => {
+const cors = require('cors')
+
+let whitelist = ['http://localhost:3000', 'http://joshmu.com']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+app.get('/', cors(corsOptions), async (req, res) => {
 
     try {
         const tweets = await getTweets()
