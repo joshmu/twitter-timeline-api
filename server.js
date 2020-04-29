@@ -9,7 +9,7 @@ const getTweets = require('./getTweets.js')
 
 const cors = require('cors')
 
-let whitelist = ['http://localhost:3000', 'http://127.0.0.1:5500', 'http://joshmu.com']
+let whitelist = ['http://localhost:3000', 'http://127.0.0.1:5500', 'https://joshmu.com']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
