@@ -1,4 +1,5 @@
 const Twitter = require('twitter-lite');
+require('dotenv').config()
 
 const auth = {
     subdomain: 'api', // "api" is the default (change for other subdomains)
@@ -12,7 +13,6 @@ const auth = {
 const client = new Twitter(auth);
 
 module.exports = async function getTweets() {
-    console.log('getting tweets...')
     const tweets = await client.get('statuses/user_timeline', {
         screen_name: 'josh_mu_',
         exclude_replies: true,
