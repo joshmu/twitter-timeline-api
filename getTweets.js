@@ -21,7 +21,7 @@ module.exports = async function getTweets() {
         screen_name: 'josh_mu_',
         exclude_replies: true,
         include_rts: false,
-        count: process.env.TWEETS_LIMIT || 20,
+        count: +process.env.TWEETS_LIMIT || 20,
         trim_user: true,
         tweet_mode: 'extended',
     });
