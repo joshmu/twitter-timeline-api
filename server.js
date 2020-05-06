@@ -3,13 +3,14 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const port = process.env.PORT
+const dev = process.env.NODE_ENV !== 'production'
 
 const twitter = require('twitter-lite')
 const getTweets = require('./getTweets.js')
 
 const cors = require('cors')
 
-let whitelist = ['http://localhost:3000', 'http://127.0.0.1:5500', 'https://joshmu.com']
+let whitelist = ['http://localhost:3000', 'http://127.0.0.1:5500', 'https://joshmu.com', 'http://joshmu.com']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -31,4 +32,4 @@ app.get('/', cors(corsOptions), async (req, res) => {
 
 })
 
-app.listen(port, () => console.log(`Listening at http://localhost:${port}`))
+app.listen(port, () => console.log(`${dev ? 'http://localhost:' : 'http://mu-twitter-timeline-api.herokuapp.com:'}${port}`))
